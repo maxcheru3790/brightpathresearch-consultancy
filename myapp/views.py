@@ -2,7 +2,7 @@
 from django.shortcuts import render
 
 def home(request):
-    return render(request, 'index.html')
+    return render(request, '../index.html')
 
 def who_we_are(request):
     return render(request, 'who_we_are.html')
