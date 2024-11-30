@@ -1,0 +1,435 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="BrightPath Analytics - Statistical Consulting Services">
+    <meta name="author" content="BrightPath Analytics">
+    <title>BrightPath Consulting Limited</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <style>
+        /* Reset Styles */
+        body, h1, h2, h3, p, ul, li, a, img, button {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Body */
+        body {
+            background-color: blue;
+            color: #fff;
+            line-height: 1.6;
+        }
+
+        /* Loading Progress Bar Styles */
+        #loading-bar-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: black;
+            z-index: 9999;
+        }
+
+        #loading-bar {
+            height: 100%;
+            width: 0;
+            background-color: #1E90FF; /* Blue color */
+        }
+
+        /* Header Section */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 10px;
+            background-color: white;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Logo positioning */
+#logo {
+    position: absolute;  /* Use absolute positioning */
+    top: 10px;           /* Space from the top of the page */
+    right: 40px;         /* Space from the right side of the page */
+    z-index: 100;        /* Ensure it's on top of other elements */
+}
+
+#logo img {
+    width: 70px;        /* Adjust the width of the logo */
+    height: auto;        /* Maintain the aspect ratio */
+}
+
+.social-links {
+    margin-top: 10px;
+}
+
+.social-icon {
+    color: dodgerblue;
+    margin: 0 10px;
+    font-size: 1.5rem;
+    text-decoration: none;
+}
+
+.social-icon:hover {
+    color: white;
+}
+
+
+
+
+        .navigation {
+            position: sticky;
+            bottom: 10px; /* Positioning it at the bottom */
+            right: 100px; /* Align it to the right */
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .navigation ul {
+            display: flex;
+            list-style-type: none;
+        }
+
+        .navigation li {
+            margin: 0 15px;
+        }
+
+        .navigation a {
+            color: #fff;
+            font-size: 18px;
+        }
+
+        .navigation a:hover {
+            color: blue; /* Blue hover */
+        }
+
+        /* Slider Section */
+        #ABdev_main_slider {
+            margin-top: 120px;
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            background-color: white;
+            padding-bottom: 20px; /* Space for the scrollbar */
+        }
+
+        .slider-container {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .slider-item {
+            min-width: 100%;
+            max-width: 100%;
+            flex-shrink: 0;
+        }
+
+        .slider-item img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+        }
+
+        .slider-nav {
+            text-align: center;
+            padding-top: 10px;
+        }
+
+        .slider-nav span {
+            cursor: pointer;
+            font-size: 24px;
+            color: blue;
+            margin: 0 5px;
+        }
+
+        .slider-nav span:hover {
+            color: #fff;
+        }
+
+        /* Footer Section */
+        footer {
+            background-color: white;
+            padding: 30px;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        footer p {
+            color: black;
+        }
+
+        /* Map Section */
+        .google-map {
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        /* Content Section */
+        .content-section {
+            padding: 50px;
+            background-color: white;
+            margin-bottom: 50px;
+        }
+
+        .content-section h2 {
+            color: blue; /* Blue */
+            margin-bottom: 20px;
+        }
+
+        .content-section p {
+            margin-bottom: 20px;
+        }
+
+        .content-section a {
+            color: blue;
+        }
+
+        .content-section a:hover {
+            color: #fff;
+        }
+
+        /* Social Media and Links */
+        .social-links {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .social-links a {
+            color: dodgerblue;
+            margin: 0 10px;
+        }
+
+        .social-links a:hover {
+            color: blue;
+        }
+
+        /* General Container Styles */
+.services {
+    background-color: #1a1a1a; /* Dark background */
+    padding: 50px 0;
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 30px; /* Adds space between columns */
+    max-width: 1200px;
+    margin: 0 auto;
+    color: black;
+}
+
+/* Individual service box styles */
+.service-box {
+    background-color: white;
+    color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    flex: 1; /* Makes each box take equal space */
+    box-sizing: border-box;
+    min-width: 250px; /* Ensures responsiveness */
+    max-width: 280px; /* Max width for the box */
+}
+
+.service-box h3 {
+    color: blue; /* Blue color */
+    margin-bottom: 15px;
+}
+
+.service-box p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: black;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column; /* Stacks the columns vertically on smaller screens */
+        gap: 20px;
+    }
+
+    .service-box {
+        min-width: 100%; /* Each box will take full width */
+        max-width: 100%; /* Full width on smaller screens */
+    }
+}
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Loading Progress Bar -->
+    <div id="loading-bar-container">
+        <div id="loading-bar"></div>
+    </div>
+
+    <!-- HEADER SECTION -->
+    <header>
+        <div id="logo">
+            <a href="#">
+                <img src="{% static 'images/Asset 27@2x.png' %}" alt="Logo"> <!-- Add your logo path here -->
+            </a>
+        </div>
+
+        <!-- Navigation Menu -->
+        <nav class="navigation">
+    <ul>
+        <li><a href="{% url 'my_index' %}">Home</a></li>
+        <li><a href="{% url 'who_we_are' %}">Who We Are</a></li>
+        <li><a href="{% url 'what_we_do' %}">What We Do</a></li>
+        <li><a href="{% url 'institute' %}">Institute</a></li>
+        <li><a href="{% url 'projects' %}">Projects</a></li>
+        <li><a href="{% url 'contact' %}">Contact</a></li>
+    </ul>
+</nav>
+
+    </header>
+
+    <!-- SLIDER SECTION (Scrollable) -->
+    <section id="ABdev_main_slider">
+        <div class="slider-container">
+            <!-- Slide 1 -->
+            <div class="slider-item">
+                <img src="{% static 'images/pexels-anntarazevich-14751274.jpg' %}" alt="Slide 1">
+            </div>
+            <!-- Slide 2 -->
+            <div class="slider-item">
+                <img src="{% static 'images/pexels-artempodrez-6823504.jpg' %}" alt="Slide 2">
+            </div>
+            <!-- Slide 3 -->
+            <div class="slider-item">
+                <img src="{% static 'images/pexels-followalice-667200.jpg' %}" alt="Slide 3">
+            </div>
+            <!-- Slide 4 -->
+            <div class="slider-item">
+                <img src="{% static 'images/pexels-goumbik-590022.jpg' %}" alt="Slide 4">
+            </div>
+            <!-- Slide 5 -->
+            <div class="slider-item">
+                <img src="{% static 'images/pexels-karolina-grabowska-7877029.jpg' %}" alt="Slide 5">
+            </div>
+        </div>
+
+        <!-- Slider Navigation (Scrollable) -->
+        <div class="slider-nav">
+            <span onclick="moveSlide(-1)">&#10094;</span>
+            <span onclick="moveSlide(1)">&#10095;</span>
+        </div>
+    </section>
+
+    <!-- DEVELOPMENT ASSISTANCE SECTION -->
+    <section id="development-assistance" class="content-section">
+        <div class="container">
+            <h2>Development Assistance through Evidence-based Research</h2>
+            <section class="services">
+    <div class="container">
+        <div class="service-box">
+            <h3>Baseline, Midterm and Endline Survey</h3>
+            <p>Cutting-edge survey research has been a cornerstone of our work since inception. Clients seek out our recognized leadership and multidisciplinary teams of experts in all aspects of survey science.</p>
+        </div>
+        <div class="service-box">
+            <h3>Design, Monitoring, and Evaluation</h3>
+            <p>We support evidence-based decision-making—focusing on the full data lifecycle to ensure that quality data and information are translated into knowledge and action.</p>
+        </div>
+        <div class="service-box">
+            <h3>Programme Management and Implementation</h3>
+            <p>We work on behalf of government agencies, foundations, NGOs, and other clients to deliver expert technical assistance in support of programs that serve critical social, economic, and humanitarian needs.</p>
+        </div>
+        <div class="service-box">
+            <h3>Data Science-driven Decision Support Systems</h3>
+            <p>We build both simple and complex data processing systems and provide clients with innovative solutions to their data management challenges.</p>
+        </div>
+    </div>
+</section>
+
+        </div>
+    </section>
+
+    <!-- WHERE WE WORK SECTION -->
+    <section id="where-we-work" class="content-section">
+    <div class="container">
+        <h2>Where We Work</h2>
+        <p>We are actively engaged across the African continent, with our primary office located in <strong>Nairobi, Kenya</strong>. Our work spans various sectors, and we collaborate with a wide range of clients, including international NGOs, national governments, regional organizations, bilateral and multilateral donors, private corporations, and philanthropic organizations.</p>
+
+        <p>Since our inception, we have provided expert technical assistance in the implementation of over 120 donor-funded projects. These projects focus on key areas such as <strong>health, education, livelihoods, markets</strong>, and <strong>capacity development</strong>. With a particular focus on <strong>Kenya</strong> and <strong>East Africa</strong>, we are committed to delivering impactful, sustainable solutions that address local challenges while contributing to broader regional development goals.</p>
+    </div>
+    </section>
+
+
+    <!-- GOOGLE MAP EMBED -->
+    <section class="google-map">
+        <h2>Our Location</h2>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.8504713620164!2d36.79644787358499!3d-1.2620415355972048!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f176bc58b7517%3A0xa3cc2e9c1630138d!2sDunhill%20Towers!5e0!3m2!1sen!2sus!4v1731239906065!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2024 BrightPath Consulting Limited | All Rights Reserved</p>
+        <div class="social-links">
+            <a href="#" class="social-icon" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+            <a href="#" class="social-icon" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-icon" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Slider and Progress Bar -->
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slider-item');
+        const totalSlides = slides.length;
+
+        // Move slider
+        function moveSlide(step) {
+            currentSlide = (currentSlide + step + totalSlides) % totalSlides;
+            const offset = -currentSlide * 100;
+            document.querySelector('.slider-container').style.transform = translateX(${offset}%);
+        }
+
+        // Auto-slide every 3 seconds
+        setInterval(() => {
+            moveSlide(1);
+        }, 3000);
+
+        // Progress bar loading simulation
+        window.onload = function () {
+            const progressBar = document.getElementById('loading-bar');
+            let width = 0;
+
+            const interval = setInterval(() => {
+                if (width >= 100) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        document.getElementById('loading-bar-container').style.display = 'none';
+                    }, 500);
+                } else {
+                    width++;
+                    progressBar.style.width = width + '%';
+                }
+            }, 20); // Simulate loading for 2 seconds
+        };
+    </script>
+
+</body>
+
+</html>

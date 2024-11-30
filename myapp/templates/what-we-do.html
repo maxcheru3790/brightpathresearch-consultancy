@@ -1,0 +1,243 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="BrightPath Analytics - Statistical Consulting Services">
+    <meta name="author" content="BrightPath Analytics">
+    <title>BrightPath Consulting Limited</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <style>
+        /* Reset Styles */
+        body, h1, h2, h3, p, ul, li, a, img, button {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Body */
+        body {
+            background-color: blue;
+            color: #fff;
+            line-height: 1.6;
+        }
+
+        /* Loading Progress Bar */
+        #loading-bar-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: black;
+            z-index: 9999;
+        }
+
+        #loading-bar {
+            height: 100%;
+            width: 0;
+            background-color: #1E90FF;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 10px;
+            background-color: white;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        #logo img {
+            width: 70px;
+            height: auto;
+        }
+
+        .navigation {
+            display: flex;
+            list-style-type: none;
+            gap: 15px;
+        }
+
+        .navigation a {
+            color: #000;
+            font-size: 18px;
+            transition: color 0.3s ease;
+        }
+
+        .navigation a:hover {
+            color: blue;
+        }
+
+        /* Main Section */
+        .container {
+            padding: 100px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .intro {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .intro h2 {
+            color: white;
+        }
+
+        .cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+
+        .card {
+            background-color: white;
+            color: black;
+            padding: 20px;
+            border-radius: 8px;
+            flex: 1 1 calc(33% - 30px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            min-width: 250px;
+            text-align: center;
+        }
+
+        .card h3 {
+            color: blue;
+            margin-bottom: 15px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: white;
+            color: black;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+
+        .social-links {
+            margin-top: 10px;
+        }
+
+        .social-links a {
+            color: dodgerblue;
+            margin: 0 10px;
+            font-size: 1.5rem;
+        }
+
+        .social-links a:hover {
+            color: blue;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .cards {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .card {
+                flex: 1 1 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Loading Progress Bar -->
+    <div id="loading-bar-container">
+        <div id="loading-bar"></div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div id="logo">
+            <a href="#"><img src="{% static 'images/Asset 27@2x.png' %}" alt="Logo"></a>
+        </div>
+        <nav>
+            <ul class="navigation">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">Who We Are</a></li>
+                <li><a href="#what-we-do">What We Do</a></li>
+                <li><a href="#institute">Institute</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Section -->
+    <main>
+        <div class="container">
+            <div class="intro">
+                <h2>What We Do</h2>
+                <p>
+                    At BrightPath Consulting, we specialize in offering cutting-edge solutions designed to empower organizations through data-driven decision-making, innovative approaches, and expert technical assistance.
+                </p>
+            </div>
+
+            <div class="cards">
+                <div class="card">
+                    <h3>Statistical Consulting</h3>
+                    <p>We provide expert statistical services, including data analysis and advanced modeling.</p>
+                </div>
+                <div class="card">
+                    <h3>Capacity Building</h3>
+                    <p>Empowering organizations through training and workshops in data analytics and M&E.</p>
+                </div>
+                <div class="card">
+                    <h3>Monitoring and Evaluation</h3>
+                    <p>Designing robust M&E frameworks to measure project success and impact.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 BrightPath Consulting Limited | All Rights Reserved</p>
+        <div class="social-links">
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        window.onload = function () {
+            const progressBar = document.getElementById('loading-bar');
+            let width = 0;
+
+            const interval = setInterval(() => {
+                if (width >= 100) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        document.getElementById('loading-bar-container').style.display = 'none';
+                    }, 500);
+                } else {
+                    width++;
+                    progressBar.style.width = width + '%';
+                }
+            }, 20);
+        };
+    </script>
+</body>
+
+</html>
